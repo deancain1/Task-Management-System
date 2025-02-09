@@ -18,7 +18,7 @@ namespace Task_Management_System
      static class Program
     {
 
-        public static IServiceProvider? ServiceProvider { get; private set; }
+        public static IServiceProvider ServiceProvider { get; private set; }
 
         [STAThread]
         static void Main()
@@ -35,10 +35,11 @@ namespace Task_Management_System
 
             var services = new ServiceCollection();
 
-            services.AddScoped<ICreateAccountServices, CreateAccountServices>();
-            services.AddScoped<IUserServices, UserServices>();
-            services.AddScoped<ITaskServices, TaskServices>();
-            services.AddScoped<IAdminServices, AdminServices>();
+            services.AddTransient<ICreateAccountServices, CreateAccountServices>();
+            services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<IAdminServices, AdminServices>();
+            services.AddTransient<ITaskServices, TaskServices>();
+
 
 
             services.AddScoped<AdminEntity>();
@@ -46,9 +47,9 @@ namespace Task_Management_System
             services.AddScoped<TaskEntity>();
 
 
-            //Admin Interfaces
+            //Admin Interfaces 
         
-            services.AddScoped<SideBarForm>();
+            services.AddTransient<SideBarForm>();
             services.AddScoped<DashboardForm>();
             services.AddScoped<CreateTaskForm>();  
             services.AddScoped<CreateTaskModalForm>();
@@ -56,15 +57,18 @@ namespace Task_Management_System
             services.AddScoped<AddUserModalForm>();
             services.AddScoped<EditTaskModalForm>();
             services.AddScoped<EditUserAccountModal>();
-
+            services.AddScoped<CreateAdminForm>();
+            services.AddScoped<CreateAdminModalForm>();
+            services.AddScoped<EditAdminModalForm>();
+         
             //Both
-            services.AddScoped<RegisterAdminForm>();
             services.AddScoped<LoginForm>();
 
             //User Interfaces
-            services.AddScoped<NavigationBarForm>();
-            services.AddScoped<TasksForm>();
-            services.AddScoped<CompletedTaskForm>();
+            services.AddTransient<NavigationBarForm>();
+            services.AddTransient<HomeForm>();
+            services.AddTransient<TasksForm>();
+            services.AddTransient<CompletedTaskForm>();
           
 
             services.AddDbContext<TMSDbContext>(options =>
