@@ -13,9 +13,10 @@ namespace Task_Management_System.Domain.DTO
         public string FirstName { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public byte[] UserProfile { get; set; } = null!;
+        public string SecurityQuestions { get; set; } = string.Empty;
+        public string Answer { get; set; } = string.Empty;
         public string  Password { get; set; } = string.Empty;
-        public string ConfirmPassword { get; set; } = string.Empty;
-        public int Count { get; set; }
+        public string Role {  get; set; } = string.Empty;
+      
     }
 }
