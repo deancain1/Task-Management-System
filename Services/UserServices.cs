@@ -17,10 +17,11 @@ namespace Task_Management_System.Services
     public class UserServices : IUserServices
     {
         private readonly DbContextOptions<TMSDbContext> _dbContextOptions;
-        public UserServices(DbContextOptions<TMSDbContext> dbContextOptions) {
+        public UserServices(DbContextOptions<TMSDbContext> dbContextOptions)
+        {
 
-            _dbContextOptions = dbContextOptions;
-        
+            this._dbContextOptions = dbContextOptions;
+
         }
 
         public async Task<bool> DeleteUserAsync(string email)
@@ -66,19 +67,41 @@ namespace Task_Management_System.Services
 
         public async Task<UserEntity?> GetUserByEmailAsync(string email)
         {
-            using (var dbContextOptions = new TMSDbContext(_dbContextOptions))
+            try
             {
-                return await dbContextOptions.Users
-                            .Where(a => a.Email == email)
-                            .FirstOrDefaultAsync();
+                using (var dbContextOptions = new TMSDbContext(_dbContextOptions))
+                {
+                    return await dbContextOptions.Users
+                   .FirstOrDefaultAsync(u => u.Email == email);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving users email.{ex.Message} ", ex);
             }
         }
 
-        public async  Task<UserEntity?> GetUserByIdAsync(int userID)
+        public async Task<UserEntity?> GetUserByIdAsync(int userID)
         {
             using (var dbContextOptions = new TMSDbContext(_dbContextOptions))
             {
                 return await dbContextOptions.Users.FirstOrDefaultAsync(a => a.UserID == userID);
+            }
+        }
+        public async Task UpdateUserAccountAsync(UserEntity userEntity)
+        {
+            using (var dbContextOptions = new TMSDbContext(_dbContextOptions))
+            {
+                var existingUser = await dbContextOptions.Users.FirstOrDefaultAsync(user => user.UserID == user.UserID);
+                if (existingUser != null)
+                {
+                    existingUser.LastName = userEntity.LastName;
+                    existingUser.FirstName = userEntity.FirstName;
+                    existingUser.MiddleName = userEntity.MiddleName;
+                    existingUser.Email = userEntity.Email;
+
+                    await dbContextOptions.SaveChangesAsync();
+                }
             }
         }
     }
