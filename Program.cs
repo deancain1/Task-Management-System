@@ -49,7 +49,7 @@ namespace Task_Management_System
 
             //Admin Interfaces 
         
-            services.AddTransient<SideBarForm>();
+            services.AddScoped<SideBarForm>();
             services.AddScoped<DashboardForm>();
             services.AddScoped<CreateTaskForm>();  
             services.AddScoped<CreateTaskModalForm>();
@@ -61,14 +61,15 @@ namespace Task_Management_System
             services.AddScoped<CreateAdminModalForm>();
             services.AddScoped<EditAdminModalForm>();
          
+         
             //Both
             services.AddScoped<LoginForm>();
 
             //User Interfaces
-            services.AddTransient<NavigationBarForm>();
-            services.AddTransient<HomeForm>();
-            services.AddTransient<TasksForm>();
-            services.AddTransient<CompletedTaskForm>();
+            services.AddScoped<NavigationBarForm>();
+            services.AddScoped<HomeForm>();
+            services.AddScoped<TasksForm>();
+            services.AddScoped<CompletedTaskForm>();
           
 
             services.AddDbContext<TMSDbContext>(options =>
