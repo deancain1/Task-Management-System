@@ -17,8 +17,6 @@ namespace Task_Management_System.Data_Connectivity.Configurations
         {
             builder.HasKey(a => a.UserID);
 
-
-
             builder.Property(a => a.LastName)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -43,10 +41,6 @@ namespace Task_Management_System.Data_Connectivity.Configurations
            .IsRequired()
            .HasMaxLength(255);
 
-            builder.Property(a => a.Role)
-            .IsRequired()
-            .HasMaxLength(50);
-
             builder.Property(a => a.SecurityQuestions)
            .IsRequired()
            .HasMaxLength(50);
@@ -55,13 +49,9 @@ namespace Task_Management_System.Data_Connectivity.Configurations
            .IsRequired()
            .HasMaxLength(50);
 
-            builder.HasMany(a => a.userRoleEntities)
-                .WithOne(ur => ur.User)
-                .HasForeignKey(ur => ur.UserID);
-
-
-
-
+            builder.Property(a => a.Role)
+            .IsRequired()
+            .HasMaxLength(50);
 
         }
     }

@@ -28,7 +28,7 @@ namespace Task_Management_System.Data_Connectivity.Configurations
            .IsRequired()
            .HasColumnType("datetime");
 
-            builder.Property(t => t.EndTime)
+            builder.Property(t => t.Deadline)
                 .IsRequired()
                .HasColumnType("datetime");
 

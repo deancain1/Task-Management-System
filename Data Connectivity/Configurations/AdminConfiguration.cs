@@ -29,21 +29,29 @@ namespace Task_Management_System.Data_Connectivity.Configurations
                    .IsRequired()
                    .HasMaxLength(255);
 
+            builder.Property(a => a.Username)
+                   .IsRequired()
+                   .HasMaxLength(50);
+
             builder.Property(a => a.SecurityQuestions)
-          .IsRequired()
-          .HasMaxLength(50);
+                   .IsRequired()
+                   .HasMaxLength(50);
 
             builder.Property(a => a.Answer)
-           .IsRequired()
-           .HasMaxLength(50);
-
+                   .IsRequired()
+                   .HasMaxLength(50);
 
             builder.Property(a => a.PasswordHash)
-            .IsRequired()
-            .HasColumnType("VARBINARY(MAX)"); 
+                   .IsRequired()
+                   .HasColumnType("VARBINARY(MAX)"); 
+
             builder.Property(a => a.PasswordSalt)
-           .IsRequired()
-            .HasColumnType("VARBINARY(MAX)"); 
+                  .IsRequired()
+                  .HasColumnType("VARBINARY(MAX)");
+
+            builder.Property(a => a.Role)
+                   .IsRequired()
+                   .HasMaxLength(50);
 
 
         }
